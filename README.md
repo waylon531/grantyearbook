@@ -1,4 +1,5 @@
-THIS IS A README
-TODO:
-Make links force download
-Test password verify
+THIS IS A README 
+TODO: 
+Test password verify 
+Make it pretty
+Add individual user accounts
