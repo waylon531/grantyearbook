@@ -29,5 +29,5 @@ else
       echo "Stored in: " . "files/" . $_FILES["file"]["name"];
       }
   }
-echo "<br><a href='/index.html'>Home</a>";
+echo "<br><a href='/verify.php'>Back</a>";
 ?> 
