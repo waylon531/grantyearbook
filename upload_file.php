@@ -31,6 +31,6 @@ else
       //echo "Stored in: " . "files/" . $_FILES["file"]["name"];
       }
   }
-echo '<meta http-equiv="refresh" content="0;URL=verify.php" /> ';
+//echo '<meta http-equiv="refresh" content="0;URL=verify.php" /> '; Uncomment to remove debug
 //echo "<br><a href='/verify.php'>Back</a>";
 ?> 

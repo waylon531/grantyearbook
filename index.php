@@ -3,7 +3,7 @@
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-    <h1>Grant High School Yearbook</h1>
+    <h1 id="title">Grant High School Yearbook</h1>
     <a href="problem.html"></a>
     <p>Enter the password:</p>
     <form action="verify.php" method="post">

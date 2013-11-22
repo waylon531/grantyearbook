@@ -1,4 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 <link rel="stylesheet" type="text/css" href="style.css">
+<title>Grant High School Yearbook</title>
+
+<!-- production -->
+<script type="text/javascript" src="/plupload-2.0.0/js/plupload.full.min.js"></script>
+<script type="text/javascript" src="./uploadsettings.js"></script>
+
+
+<!-- debug
+<script type="text/javascript" src="../js/moxie.js"></script>
+<script type="text/javascript" src="../js/plupload.dev.js"></script>
+-->
+
+</head>
 <?php session_start();
 if(!empty($_POST["password"])){ //Set the password variable in the session to the password entered
     $_SESSION['password'] = $_POST["password"];
@@ -31,7 +48,7 @@ if ($_SESSION['password'] == "password") { //Check password against plaintext. U
         }
     }
     echo "</table>";
-    echo "<h3>File Upload</h3><br>"; //Create a form for file upload
+    /*echo "<h3>File Upload</h3><br>"; //Create a form for file upload
     echo '<form action="upload_file.php" method="post" 
 enctype="multipart/form-data">
 <label for="file">Filename:</label>
@@ -40,7 +57,11 @@ enctype="multipart/form-data">
 <input type="radio" name="overwrite" value="Yes">Yes<br>
 <input type="radio" name="overwrite" value="No" checked>No<br>
 <input type="submit" name="submit" value="Submit">
-</form>';
+</form>'; Old upload form*/
+    echo '<script>var verify = true;</script>';
+    $html = file_get_contents('./fileupload.php');
+    echo $html;
+    echo '<script>var verify = false;</script>';
     if (!isset($_SESSION['overwritten'])) {
         $_SESSION['overwritten'] = "";
     }
