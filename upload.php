@@ -120,13 +120,11 @@ while ($buff = fread($in, 4096)) {
 if (!$chunks || $chunk == $chunks - 1) {
         // Strip the temp .part suffix off
         rename("{$filePath}.part", $targetDir . DIRECTORY_SEPARATOR . $fileName);
-}
-if (!$chunks || $chunk == $chunks - 1) {
-    $file = $_FILES["file"]["name"];
+    $file = $fileName;
   //echo "Type: " . $_FILES["file"]["type"] . "<br>";
   //echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
   //echo "Stored in: " . $_FILES["file"]["tmp_name"];
-  $tmpFile = $_FILES["file"]["tmp_name"];
+  $tmpFile = $filePath;
  // echo "<br>";
     if (file_exists("files/" . $file) and $_POST["overwrite"]==="Yes")
       {
@@ -136,11 +134,11 @@ if (!$chunks || $chunk == $chunks - 1) {
         //echo "Stored in: " . "files/" . $_FILES["file"]["name"];
 
         //Place it into your "uploads" folder mow using the move_uploaded_file() function
-        move_uploaded_file($_FILES["file"]["tmp_name"], 'files/' . $file);
+        rename($tmpFile, 'files/' . $file);
     } else {
-      move_uploaded_file($_FILES["file"]["tmp_name"], "files/" . $_FILES["file"]["name"]);
+      rename($tmpFile, "files/" . $file);
       //echo "Stored in: " . "files/" . $_FILES["file"]["name"];
-      }    
+      } 
 }
 
 // Return Success JSON-RPC response

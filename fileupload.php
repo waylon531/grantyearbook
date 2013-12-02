@@ -18,7 +18,7 @@
 <body style="font: 13px Verdana; background: #eee; color: #333">
 
 <h1>File Upload:</h1>
-<p>Files will be renamed if they already exist</p>
+<p>Files will be overwritten if they already exist</p>
 <div id="filelist">Your browser doesn't have Flash, Silverlight or HTML5 support.</div>
 <br />
 
