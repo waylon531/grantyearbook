@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 /**
 * upload.php
 *
@@ -126,7 +126,7 @@ if (!$chunks || $chunk == $chunks - 1) {
   //echo "Stored in: " . $_FILES["file"]["tmp_name"];
   $tmpFile = $filePath;
  // echo "<br>";
-    if (file_exists("files/" . $file) and $_POST["overwrite"]==="Yes")
+    if (file_exists("files/" . $file) and $_SESSION["overwrite"]=="Overwrite disabled")
       {
         //echo "<p>Overwriting</p>";
         //checking if file exsists
@@ -135,6 +135,10 @@ if (!$chunks || $chunk == $chunks - 1) {
 
         //Place it into your "uploads" folder mow using the move_uploaded_file() function
         rename($tmpFile, 'files/' . $file);
+        $_SESSION['overwritten'] = true;
+        } else if (file_exists("files/" . $file) and $_SESSION["overwrite"]=="Overwrite enabled") {
+       // echo "<p>File not overwritten</p>";
+        $_SESSION['overwritten'] = false;
     } else {
       rename($tmpFile, "files/" . $file);
       //echo "Stored in: " . "files/" . $_FILES["file"]["name"];
