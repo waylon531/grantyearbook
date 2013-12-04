@@ -15,7 +15,6 @@
 -->
 
 </head>
-<body style="font: 13px Verdana; background: #eee; color: #333">
 
 <h1>File Upload:</h1>
 <p>Files will be overwritten if they already exist</p>

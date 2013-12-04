@@ -76,7 +76,10 @@ if ($_SESSION['password'] == "password") { //Check password against plaintext. U
         echo "<p id=valid>File successfully overwritten</p>";
     }
     $_SESSION['overwritten'] = "";
-    echo "<a href='verify.php'>Click to refresh page and show uploaded files</a>";
+    echo '<form name="input" action="/verify.php" method="post">
+<input type="submit" value="Click to refresh page"';
+        echo '>
+</form> ';
 } else {
     $_SESSION['invalid'] = true; //If the password was incorrectly entered change invalid to true so that when you go back to the home page invalid password is displayed
     echo '<meta http-equiv="refresh" content="0;URL=index.php" /> '; //If the password was incorrect return you to the login page
