@@ -1,8 +1,8 @@
 <?php session_start();
 if(empty($_SESSION["password"])) {
-    echo '<a href="/index.php">Go home!</a>';
+    echo '<meta http-equiv="refresh" content="0;URL=/index.php" />';
 } else {
-    echo '<a href="/verify.php">Go back!</a>';
+    echo '<meta http-equiv="refresh" content="0;URL=/verify.php" />';
 }
 
 ?>
