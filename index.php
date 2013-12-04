@@ -19,5 +19,6 @@ if ($_SESSION['invalid'] == true) {
     $_SESSION['invalid'] = false; //Reset invalid
 }
 ?>
+        <p>If you find any bugs, report them to the website's <a href="https://github.com/waylon531/grantyearbook/issues">github</a></p>
     </body>
 </html>
