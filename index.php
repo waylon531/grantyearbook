@@ -1,6 +1,8 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="style.css">
+        <title>Grant High School Yearbook</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     </head>
     <body>
     <h1 id="title">Grant High School Yearbook</h1>

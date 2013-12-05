@@ -47,25 +47,24 @@ function content() {
         }
     }
     echo "</table>";
-    if(!empty($_POST["overwrite"])){ //Set the password variable in the session to the password entered
+    
+    echo '<script>var verify = true;</script>';
+    $html = file_get_contents('./fileupload.php');
+    echo $html;
+    echo '<script>var verify = false;</script>';
+    if(!empty($_POST["overwrite"])){ //Set the overwrite variable in the session to the variable entered
     $_SESSION['overwrite'] = $_POST["overwrite"];
 } else if(empty($_SESSION["overwrite"])) { 
-    $_SESSION['overwrite'] = ""; //If password was not entered initialize it so there are no errors
+    $_SESSION['overwrite'] = ""; //If overwrite was not entered initialize it so there are no errors
 }
-    echo '<form name="input" action="/verify.php" method="post">
+    echo '<form id="button" name="input" action="/verify.php" method="post">
 <input type="submit" value=';
     if($_SESSION['overwrite'] == "Overwrite disabled") { //Create buttons for user input on overwriting
     echo '"Overwrite enabled" name="overwrite"'; //Sets overwrite to the opposite of what it should be
     } else {
     echo '"Overwrite disabled" name="overwrite"';
     }
-        echo '>
-</form> ';
-    echo '<p id="invalid">If you click this button the page will refresh, clearing your queue of file uploads.</p>';
-    echo '<script>var verify = true;</script>';
-    $html = file_get_contents('./fileupload.php');
-    echo $html;
-    echo '<script>var verify = false;</script>';
+        echo '><span id="invalid">If you click overwrite enabled the page will refresh, clearing your queue of file uploads.</span></form> ';
     if (!isset($_SESSION['overwritten'])) {
         $_SESSION['overwritten'] = "";
     }
