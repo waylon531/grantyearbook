@@ -29,7 +29,6 @@ function formatBytes($size, $precision = 2) //function to change file size suffi
 
     return round(pow(1024, $base - floor($base)), $precision) . $suffixes[floor($base)];
 }
-$hash = "23a33778aadbd7cf9a529979b01dbff5"; //The password hash
 function content() {
     $version = PHP_VERSION_ID/100 - 500; //Get the version number and remove the 5 from th front of it
     $_SESSION['validPassword'] = true; //Save that the password was valid
@@ -92,6 +91,7 @@ if ($version < 5) {
         echo '<meta http-equiv="refresh" content="0;URL=index.php" /> '; //If the password was incorrect return you to the login page
     }
 } else if ($version >= 5) {
+    $hash = "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"; //The password hash  in SHA-256. Replace this with the hash of the password of your choosing
     if (password_verify($_SESSION['password'], $hash)) {
         content();
     } else {
