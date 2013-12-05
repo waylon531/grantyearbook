@@ -18,6 +18,11 @@ if ($_SESSION['invalid'] == true) {
     echo "<p id=invalid>Invalid password!</p>"; //Display invalid password if the user entered an incorrect password
     $_SESSION['invalid'] = false; //Reset invalid
 }
+if(!empty($_SESSION['validPassword'])) { //If the password has been verified this session, redirect to the files page
+    if($_SESSION['validPassword'] === true) {
+        echo '<meta http-equiv="refresh" content="0;URL=/verify.php" />';
+    }
+}
 ?>
         <p>If you find any bugs, report them to the website's <a href="https://github.com/waylon531/grantyearbook/issues">github</a></p>
     </body>

@@ -30,9 +30,9 @@ function formatBytes($size, $precision = 2) //function to change file size suffi
     return round(pow(1024, $base - floor($base)), $precision) . $suffixes[floor($base)];
 }
 $hash = "23a33778aadbd7cf9a529979b01dbff5"; //The password hash
-//Checks the entered password against the password hash
-//if (password_verify($_SESSION["password"], $hash)) {
-if ($_SESSION['password'] == "password") { //Check password against plaintext. Uncomment line 34 and comment line 35 to enable password hash verification
+function content() {
+    $version = PHP_VERSION_ID/100 - 500; //Get the version number and remove the 5 from th front of it
+    $_SESSION['validPassword'] = true; //Save that the password was valid
     echo '<a href="redirect.php">Logout</a><br>';
     echo "<h2>Current Files</h2><p>Click on link to download.</p>";
     $files = scandir('./files'); //Change directory to where the files will be saved
@@ -80,8 +80,23 @@ if ($_SESSION['password'] == "password") { //Check password against plaintext. U
 <input type="submit" value="Click to refresh page"';
         echo ">
 </form> <p>If you find any bugs, report them to the website's <a href='https://github.com/waylon531/grantyearbook/issues'>github</a></p>";
-} else {
-    $_SESSION['invalid'] = true; //If the password was incorrectly entered change invalid to true so that when you go back to the home page invalid password is displayed
-    echo '<meta http-equiv="refresh" content="0;URL=index.php" /> '; //If the password was incorrect return you to the login page
+    echo 'This server is running php version 5.' . $version;}
+//Checks the entered password against the password hash
+$version = PHP_VERSION_ID/100 - 500; //Get the version number and remove the 5 from th front of it
+if ($version < 5) {
+    if ($_SESSION['password'] == "password") { //Check password against plaintext. Uncomment line 34 and comment line 35 to enable password hash verification
+        content();
+    
+    } else {
+        $_SESSION['invalid'] = true; //If the password was incorrectly entered change invalid to true so that when you go back to the home page invalid password is displayed
+        echo '<meta http-equiv="refresh" content="0;URL=index.php" /> '; //If the password was incorrect return you to the login page
+    }
+} else if ($version >= 5) {
+    if (password_verify($_SESSION['password'], $hash)) {
+        content();
+    } else {
+        $_SESSION['invalid'] = true; //If the password was incorrectly entered change invalid to true so that when you go back to the home page invalid password is displayed
+        echo '<meta http-equiv="refresh" content="0;URL=index.php" /> '; //If the password was incorrect return you to the login page
+    }
 }
 ?>
