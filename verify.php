@@ -20,7 +20,7 @@ function formatBytes($size, $precision = 2) //function to change file size suffi
     return round(pow(1024, $base - floor($base)), $precision) . $suffixes[floor($base)];
 }
 function content() {
-    $version = PHP_VERSION_ID/100 - 500; //Get the version number and remove the 5 from th front of it
+    $version = PHP_VERSION_ID/100 - 500; //Get the version number and remove the 5 from the front of it
     $_SESSION['validPassword'] = true; //Save that the password was valid
     echo '<a href="redirect.php">Logout</a><br>';
     echo "<h2>Current Files</h2><p>Click on link to download.</p>";
@@ -30,9 +30,15 @@ function content() {
     foreach($files as $file){
         if ($file != "." and $file != ".." and $file != "index.php") { //Ignore the . and .. directories and index.php in the files directory when listing files
             echo "<tr>";
-            echo '<td><a href="./files/'.$file.'"target="_blank" download>'.$file.'</a>';
-            echo "<td>" . formatBytes(filesize('./files/' . $file)) ; //Creates a link to each file, displays filesize, and forces download
-            echo "<td>" . date ("F d Y H:i:s", filemtime('./files/' . $file)); //Shows date modified
+            
+            if (filesize('./files/' . $file) == 0) {
+                echo '<td><a href="./listfiles.php/?folder=' . $file . '">'.$file.'</a></td>';
+                echo "<td>FOLDER</td>";
+            } else {
+                echo '<td><a href="./files/'.$file.'"target="_blank" download>'.$file.'</a></td>';
+                echo "<td>" . formatBytes(filesize('./files/' . $file)) ; //Creates a link to each file, displays filesize, and forces download
+            }
+            echo "<td>" . date ("F d Y H:i:s", filemtime('./files/' . $file)) . "</td>"; //Shows date modified
             echo "</tr>";
         }
     }
