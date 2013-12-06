@@ -9,8 +9,8 @@
     <a href="problem.html"></a>
     <p>Enter the password:</p>
     <form action="verify.php" method="post">
-        Password: <input type="password" name="password"><br>
-        <input type="submit">
+        Password: <input type="password" name="password">
+        <input type="submit" value="Login">
     </form>
 <?php session_start();
 if (empty($_SESSION['invalid'])) { //If invalid has no value set it to false so it doesn't give errors

@@ -1,19 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+<html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 <link rel="stylesheet" type="text/css" href="style.css">
 <title>Grant High School Yearbook</title>
-
-<!-- production -->
-<script type="text/javascript" src="/plupload-2.0.0/js/plupload.full.min.js"></script>
-<script type="text/javascript" src="./uploadsettings.js"></script>
-
-
-<!-- debug
-<script type="text/javascript" src="../js/moxie.js"></script>
-<script type="text/javascript" src="../js/plupload.dev.js"></script>
--->
 
 </head>
 <?php session_start();
@@ -47,7 +37,10 @@ function content() {
         }
     }
     echo "</table>";
-    
+    echo '<form name="input" action="/verify.php" method="post">
+<input type="submit" value="Click to refresh page"';
+        echo ">
+</form>";
     echo '<script>var verify = true;</script>';
     $html = file_get_contents('./fileupload.php');
     echo $html;
@@ -64,7 +57,7 @@ function content() {
     } else {
     echo '"Overwrite disabled" name="overwrite"';
     }
-        echo '><span id="invalid">If you click overwrite enabled the page will refresh, clearing your queue of file uploads.</span></form> ';
+        echo '><span id="invalid">If you toggle the overwrite button the page will refresh, clearing your queue of file uploads.</span></form> '; //Alt text(If you click either of these buttons the page will refresh, clearing your queue of file uploads
     if (!isset($_SESSION['overwritten'])) {
         $_SESSION['overwritten'] = "";
     }
@@ -74,10 +67,7 @@ function content() {
         echo "<p id=valid>File successfully overwritten</p>";
     }
     $_SESSION['overwritten'] = "";
-    echo '<form name="input" action="/verify.php" method="post">
-<input type="submit" value="Click to refresh page"';
-        echo ">
-</form> <p>If you find any bugs, report them to the website's <a href='https://github.com/waylon531/grantyearbook/issues'>github</a></p>";
+    echo "<p>If you find any bugs, report them to the website's <a href='https://github.com/waylon531/grantyearbook/issues'>github</a></p>";
     echo 'This server is running php version 5.' . $version;}
 //Checks the entered password against the password hash
 $version = PHP_VERSION_ID/100 - 500; //Get the version number and remove the 5 from th front of it
