@@ -72,7 +72,7 @@ function content() {
 //Checks the entered password against the password hash
 $version = PHP_VERSION_ID/100 - 500; //Get the version number and remove the 5 from th front of it
 if ($version < 5) {
-    if ($_SESSION['password'] == "password") { //Check password against plaintext. Uncomment line 34 and comment line 35 to enable password hash verification
+    if ("5f4dcc3b5aa765d61d8327deb882cf99" == md5($_SESSION['password'])) { //Check password using the md5 function.
         content();
     
     } else {
