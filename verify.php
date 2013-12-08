@@ -70,22 +70,12 @@ function content() {
     echo "<p>If you find any bugs, report them to the website's <a href='https://github.com/waylon531/grantyearbook/issues'>github</a></p>";
     echo 'This server is running php version 5.' . $version;}
 //Checks the entered password against the password hash
-$version = PHP_VERSION_ID/100 - 500; //Get the version number and remove the 5 from th front of it
-if ($version < 5) {
-    if ("5f4dcc3b5aa765d61d8327deb882cf99" == md5($_SESSION['password'])) { //Check password using the md5 function.
+//Get the version number and remove the 5 from th front of it
+    if ("23a33778aadbd7cf9a529979b01dbff5" == md5($_SESSION['password'])) { //Check password using the md5 function.
         content();
     
     } else {
         $_SESSION['invalid'] = true; //If the password was incorrectly entered change invalid to true so that when you go back to the home page invalid password is displayed
         echo '<meta http-equiv="refresh" content="0;URL=index.php" /> '; //If the password was incorrect return you to the login page
     }
-} else if ($version >= 5) {
-    $hash = "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"; //The password hash  in SHA-256. Replace this with the hash of the password of your choosing
-    if (password_verify($_SESSION['password'], $hash)) {
-        content();
-    } else {
-        $_SESSION['invalid'] = true; //If the password was incorrectly entered change invalid to true so that when you go back to the home page invalid password is displayed
-        echo '<meta http-equiv="refresh" content="0;URL=index.php" /> '; //If the password was incorrect return you to the login page
-    }
-}
 ?>
