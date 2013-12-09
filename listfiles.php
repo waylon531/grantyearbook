@@ -44,22 +44,12 @@ echo "<td>";
 </form>";
 echo "</table>";}
 $version = PHP_VERSION_ID/100 - 500; //Get the version number and remove the 5 from the front of it
-if ($version < 5) {
-    if ($_SESSION['password'] == "password") { //Check password against plaintext. Uncomment line 34 and comment line 35 to enable password hash verification
+    if ("23a33778aadbd7cf9a529979b01dbff5" == md5($_SESSION['password'])) { //Check password against plaintext. Uncomment line 34 and comment line 35 to enable password hash verification
         content();
     
     } else {
         $_SESSION['invalid'] = true; //If the password was incorrectly entered change invalid to true so that when you go back to the home page invalid password is displayed
         echo '<meta http-equiv="refresh" content="0;URL=index.php" /> '; //If the password was incorrect return you to the login page
     }
-} else if ($version >= 5) {
-    $hash = "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"; //The password hash  in SHA-256. Replace this with the hash of the password of your choosing
-    if (password_verify($_SESSION['password'], $hash)) {
-        content();
-    } else {
-        $_SESSION['invalid'] = true; //If the password was incorrectly entered change invalid to true so that when you go back to the home page invalid password is displayed
-        echo '<meta http-equiv="refresh" content="0;URL=index.php" /> '; //If the password was incorrect return you to the login page
-    }
-}
 ?>
 </html>
