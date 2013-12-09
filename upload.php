@@ -126,19 +126,26 @@ if (!$chunks || $chunk == $chunks - 1) {
   //echo "Stored in: " . $_FILES["file"]["tmp_name"];
   $tmpFile = $filePath;
  // echo "<br>";
-    if (file_exists("files/" . $file) and $_SESSION["overwrite"]=="Overwrite disabled")
+    if (file_exists("files/" . $file)) //Check if file exists
       {
         //echo "<p>Overwriting</p>";
         //checking if file exsists
-        if(file_exists('files/' . $file)) unlink('files/' . $file);
-        //echo "Stored in: " . "files/" . $_FILES["file"]["name"];
+        if(file_exists('files/oldest/' . $file))
+            {
+            unlink('files/oldest' . $file);
+            }
+        if(file_exists('files/older/' . $file))
+            {
+            rename('files/older/' . $file, 'files/oldest/' . $file);
+            }
+        if(file_exists('files/old/' . $file))
+            {
+            rename('files/old/' . $file, 'files/older/' . $file);
+            }
+        rename('files/' . $file, 'files/old/' . $file);
 
-        //Place it into your "uploads" folder mow using the move_uploaded_file() function
+        //Place the newest file into your "uploads" folder mow using the move_uploaded_file() function
         rename($tmpFile, 'files/' . $file);
-        $_SESSION['overwritten'] = true;
-        } else if (file_exists("files/" . $file) and $_SESSION["overwrite"]=="Overwrite enabled") {
-       // echo "<p>File not overwritten</p>";
-        $_SESSION['overwritten'] = false;
     } else {
       rename($tmpFile, "files/" . $file);
       //echo "Stored in: " . "files/" . $_FILES["file"]["name"];

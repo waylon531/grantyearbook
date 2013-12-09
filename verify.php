@@ -47,32 +47,11 @@ function content() {
 <input type="submit" value="Click to refresh page"';
         echo ">
 </form>";
+    echo "<p>To retrieve older versions of a file look through the folders old, older, and oldest for the file. If you want the current file to be that file, reupload it.</p>";
     echo '<script>var verify = true;</script>';
     $html = file_get_contents('./fileupload.php');
     echo $html;
     echo '<script>var verify = false;</script>';
-    if(!empty($_POST["overwrite"])){ //Set the overwrite variable in the session to the variable entered
-    $_SESSION['overwrite'] = $_POST["overwrite"];
-} else if(empty($_SESSION["overwrite"])) { 
-    $_SESSION['overwrite'] = ""; //If overwrite was not entered initialize it so there are no errors
-}
-    echo '<form id="button" name="input" action="/verify.php" method="post">
-<input type="submit" value=';
-    if($_SESSION['overwrite'] == "Overwrite disabled") { //Create buttons for user input on overwriting
-    echo '"Overwrite enabled" name="overwrite"'; //Sets overwrite to the opposite of what it should be
-    } else {
-    echo '"Overwrite disabled" name="overwrite"';
-    }
-        echo '><span id="invalid">If you toggle the overwrite button the page will refresh, clearing your queue of file uploads.</span></form> '; //Alt text(If you click either of these buttons the page will refresh, clearing your queue of file uploads
-    if (!isset($_SESSION['overwritten'])) {
-        $_SESSION['overwritten'] = "";
-    }
-    if ($_SESSION['overwritten'] === false) {
-        echo "<p id=invalid>File not overwritten</p>";
-    } else if ($_SESSION['overwritten'] === true) {
-        echo "<p id=valid>File successfully overwritten</p>";
-    }
-    $_SESSION['overwritten'] = "";
     echo "<p>If you find any bugs, report them to the website's <a href='https://github.com/waylon531/grantyearbook/issues'>github</a></p>";
     echo 'This server is running php version 5.' . $version;}
 //Checks the entered password against the password hash
