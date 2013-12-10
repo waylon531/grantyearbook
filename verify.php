@@ -7,6 +7,22 @@
 
 </head>
 <?php session_start();
+// Create connection
+$con=mysqli_connect("localhost","root","","userpass");
+
+// Check connection
+if (mysqli_connect_errno())
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  }
+$result = mysqli_query($con,"SELECT * FROM userpass
+WHERE username='admin'");
+
+while($row = mysqli_fetch_array($result))
+  {
+  echo $row['username'] . " " . $row['hash'];
+  echo "<br>";
+  }
 if(!empty($_POST["password"])){ //Set the password variable in the session to the password entered
     $_SESSION['password'] = $_POST["password"];
 } else if(empty($_SESSION["password"])) { 
