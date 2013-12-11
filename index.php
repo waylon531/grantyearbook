@@ -26,7 +26,7 @@ if ($_SESSION['invalid'] == true) {
 }
 if(!empty($_SESSION['validPassword'])) { //If the password has been verified this session, redirect to the files page
     if($_SESSION['validPassword'] === true) {
-        echo '<meta http-equiv="refresh" content="0;URL=/verify.php" />';
+       // echo '<meta http-equiv="refresh" content="0;URL=/verify.php" />';
     }
 }
 ?>
