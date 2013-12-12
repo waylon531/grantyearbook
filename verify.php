@@ -11,13 +11,16 @@
 $con=mysqli_connect("localhost","user","password","userpass");
 
 // Check connection
+if (empty($_POST['username'])) {
+    $_POST['username'] = $_SESSION['username'];
+}
 if (mysqli_connect_errno())
   {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
 $result = mysqli_query($con,'SELECT * FROM userpass
 WHERE username="' .$_POST['username']. '"');
-
+$_SESSION['username'] = $_POST['username']; //Saves username to session
 while($row = mysqli_fetch_array($result))
   {
     $GLOBALS['hash']=$row['hash'];
@@ -46,7 +49,7 @@ function content() {
         if ($file != "." and $file != ".." and $file != "index.php") { //Ignore the . and .. directories and index.php in the files directory when listing files
             echo "<tr>";
             
-            if (filesize('./files/' . $file) == 0) {
+            if (filetype('./files/' . $file) == "dir") {
                 echo '<td><a href="./listfiles.php/?folder=' . $file . '">'.$file.'</a></td>';
                 echo "<td>FOLDER</td>";
             } else {

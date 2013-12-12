@@ -17,6 +17,7 @@
         </table>
     </form>
 <?php session_start();
+//echo sys_get_temp_dir(); Debugging
 if (empty($_SESSION['invalid'])) { //If invalid has no value set it to false so it doesn't give errors
     $_SESSION['invalid'] = false;
 }
@@ -26,7 +27,7 @@ if ($_SESSION['invalid'] == true) {
 }
 if(!empty($_SESSION['validPassword'])) { //If the password has been verified this session, redirect to the files page
     if($_SESSION['validPassword'] === true) {
-       // echo '<meta http-equiv="refresh" content="0;URL=/verify.php" />';
+       echo '<meta http-equiv="refresh" content="0;URL=/verify.php" />';
     }
 }
 ?>
