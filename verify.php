@@ -7,6 +7,21 @@
 
 </head>
 <?php session_start();
+// Create connection
+$con=mysqli_connect("localhost","user","password","userpass");
+
+// Check connection
+if (mysqli_connect_errno())
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  }
+$result = mysqli_query($con,'SELECT * FROM userpass
+WHERE username="' .$_POST['username']. '"');
+
+while($row = mysqli_fetch_array($result))
+  {
+    $GLOBALS['hash']=$row['hash'];
+  }
 if(!empty($_POST["password"])){ //Set the password variable in the session to the password entered
     $_SESSION['password'] = $_POST["password"];
 } else if(empty($_SESSION["password"])) { 
@@ -56,7 +71,7 @@ function content() {
     echo 'This server is running php version 5.' . $version;}
 //Checks the entered password against the password hash
 //Get the version number and remove the 5 from th front of it
-    if ("23a33778aadbd7cf9a529979b01dbff5" == md5($_SESSION['password'])) { //Check password using the md5 function.
+    if ($GLOBALS['hash'] == md5($_SESSION['password'])) { //Check password using the md5 function.
         content();
     
     } else {
