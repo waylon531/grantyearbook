@@ -46,17 +46,18 @@ if ($_POST['password'] === $_POST['password2'] and $passhash  == $hash) {
     $useruser = $_POST['username'];
    if (!mysqli_query($con, "INSERT INTO `userpass`.`userpass` (`username`, `hash`) VALUES ('$useruser', '$hash')"))
       {
-  die('Error: ' . mysqli_error($con));
-  }
-    echo "<p id='valid'>Registration complete!</p>";
+    //die('Error: ' . mysqli_error($con));
+      echo "<p id='invalid'>User already exists</p>";
+  } else {
+    echo "<p id='valid'>Registration complete!</p>";}
 } else  if ($_POST['password2'] != $_POST['password'] and !empty($_POST['password2'])){
     echo "<p id='invalid'>Passwords do not match</p>";
 } else if (md5($_POST['password3'])!= $hash and !empty($_POST['password3'])) {
     echo "<p id='invalid'>Incorrect account creation password</p>";
 }
-echo '<form name="input" action="/index.php" method="post">
-<input type="submit" value="Back">
-</form>';
 ?>
+<form name="input" action="/index.php" method="post">
+<input type="submit" value="Back">
+</form>
     </body>
 </html>
