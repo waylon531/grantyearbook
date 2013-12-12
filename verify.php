@@ -74,7 +74,7 @@ function content() {
     echo 'This server is running php version 5.' . $version;}
 //Checks the entered password against the password hash
 //Get the version number and remove the 5 from th front of it
-    if ($GLOBALS['hash'] == md5($_SESSION['password'])) { //Check password using the md5 function.
+    if (password_verify($_SESSION['password'] , $GLOBALS['hash'])) { //Check password using the md5 function.
         content();
     
     } else {

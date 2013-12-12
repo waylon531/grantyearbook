@@ -40,7 +40,8 @@ $passhash = md5($_POST['password3']);
 echo $hash . "<br>";
 echo $passhash . "<br>";*/
 if ($_POST['password'] === $_POST['password2'] and $passhash  == $hash) {
-    $hash = md5($_POST['password']);
+    //$hash = md5($_POST['password']); MD5, not used
+    $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
     /*echo $_POST['username']; //Debugging
     echo $hash;*/
     $useruser = $_POST['username'];
