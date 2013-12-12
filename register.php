@@ -16,8 +16,10 @@
         </table>
     </form>
 <?php
+session_start();
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 'On');
+$_SESSION['invalid'] = false;
 $con=mysqli_connect("localhost","user","password","userpass");
 if (mysqli_connect_errno())
   {
@@ -52,7 +54,7 @@ if ($_POST['password'] === $_POST['password2'] and $passhash  == $hash) {
 } else if (md5($_POST['password3'])!= $hash and !empty($_POST['password3'])) {
     echo "<p id='invalid'>Incorrect account creation password</p>";
 }
-echo '<form name="input" action="/verify.php" method="post">
+echo '<form name="input" action="/index.php" method="post">
 <input type="submit" value="Back">
 </form>';
 ?>
