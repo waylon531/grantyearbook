@@ -32,10 +32,15 @@ if (empty($_POST['password2'])) {
 if (empty($_POST['password3'])) {
     $_POST['password3'] = "";
 }
-if ($_POST['password'] === $_POST['password2'] and md5($_POST['password3']) === "a6bf2e0ec667108627f1a499dae35671a6bf2e0ec667108627f1a499dae35671") {
+$hash = "a6bf2e0ec667108627f1a499dae35671";
+$passhash = md5($_POST['password3']);
+/*echo md5($_POST['password3']) . "<br>"; //For debugging
+echo $hash . "<br>";
+echo $passhash . "<br>";*/
+if ($_POST['password'] === $_POST['password2'] and $passhash  == $hash) {
     $hash = md5($_POST['password']);
-    echo $_POST['username'];
-    echo $hash;
+    /*echo $_POST['username']; //Debugging
+    echo $hash;*/
     $useruser = $_POST['username'];
    if (!mysqli_query($con, "INSERT INTO `userpass`.`userpass` (`username`, `hash`) VALUES ('$useruser', '$hash')"))
       {
@@ -44,7 +49,7 @@ if ($_POST['password'] === $_POST['password2'] and md5($_POST['password3']) === 
     echo "<p id='valid'>Registration complete!</p>";
 } else  if ($_POST['password2'] != $_POST['password'] and !empty($_POST['password2'])){
     echo "<p id='invalid'>Passwords do not match</p>";
-} else if (md5($_POST['password3'])!= "a6bf2e0ec667108627f1a499dae35671a6bf2e0ec667108627f1a499dae35671" and !empty($_POST['password3'])) {
+} else if (md5($_POST['password3'])!= $hash and !empty($_POST['password3'])) {
     echo "<p id='invalid'>Incorrect account creation password</p>";
 }
 echo '<form name="input" action="/verify.php" method="post">
