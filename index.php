@@ -30,6 +30,7 @@ if(!empty($_SESSION['validPassword'])) { //If the password has been verified thi
     }
 }
 ?>
+        <a href="./register.php">Register</a>
         <p>If you find any bugs, report them to the website's <a href="https://github.com/waylon531/grantyearbook/issues">github</a></p>
     </body>
 </html>
