@@ -72,6 +72,7 @@ function content() {
     echo '<script>var verify = false;</script>';
     echo "<p>If you find any bugs, report them to the website's <a href='https://github.com/waylon531/grantyearbook/issues'>github</a></p>";
     echo 'This server is running php version 5.' . $version;}
+    //echo sys_get_temp_dir();
 //Checks the entered password against the password hash
 //Get the version number and remove the 5 from th front of it
     if (password_verify($_SESSION['password'] , $GLOBALS['hash'])) { //Check password using the md5 function.
