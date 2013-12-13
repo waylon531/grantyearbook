@@ -9,6 +9,7 @@
     <form action="register.php" method="post">
         <table>
             <tr><td>Username: <td><input type="text" name="username">
+            <tr><td>Real Name: <td><input type="text" name="name">
             <tr><td>Password:<td><input type="password" name="password">
             <tr><td>Verify password:<td><input type="password" name="password2">
             <tr><td>Account creation password:<td><input type="password" name="password3">
@@ -44,8 +45,9 @@ if ($_POST['password'] === $_POST['password2'] and $passhash  == $hash) {
     $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
     /*echo $_POST['username']; //Debugging
     echo $hash;*/
-    $useruser = $_POST['username'];
-   if (!mysqli_query($con, "INSERT INTO `userpass`.`userpass` (`username`, `hash`) VALUES ('$useruser', '$hash')"))
+    $name = $_POST['username'];
+    $useruser = $_POST['name'];
+   if (!mysqli_query($con, "INSERT INTO `userpass`.`userpass` (`username`, `hash`, `realname`) VALUES ('$useruser', '$hash', '$name')"))
       {
     //die('Error: ' . mysqli_error($con));
       echo "<p id='invalid'>User already exists</p>";

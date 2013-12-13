@@ -10,12 +10,12 @@ else
   echo "Error creating database: " . mysqli_error($con) . "<br>";
   }
 // Create table
-$sql="CREATE TABLE userpass(username char(64) not null,PRIMARY KEY(username),hash CHAR(255))";
+$sql="CREATE TABLE userpass(username char(64) not null,PRIMARY KEY(username),hash CHAR(255),realname CHAR(255))";
 $con=mysqli_connect("localhost","root","1337haXX0r","userpass");
 // Execute query
 if (mysqli_query($con,$sql))
   {
-  echo "Table persons created successfully";
+  echo "Table userpass created successfully";
   }
 else
   {
