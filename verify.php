@@ -24,6 +24,7 @@ $_SESSION['username'] = $_POST['username']; //Saves username to session
 while($row = mysqli_fetch_array($result))
   {
     $GLOBALS['hash']=$row['hash'];
+    $_SESSION['realname']=$row['realname'];
   }
 if(!empty($_POST["password"])){ //Set the password variable in the session to the password entered
     $_SESSION['password'] = $_POST["password"];

@@ -17,7 +17,6 @@
 </head>
 
 <h1>File Upload:</h1>
-<p>Files will be overwritten if they already exist</p>
 <div id="filelist">Your browser doesn't have Flash, Silverlight or HTML5 support.</div>
 <br />
 
@@ -35,7 +34,10 @@
 
 <script type="text/javascript">
 // Custom example logic
-
+function reload()
+{
+}
+    
 var uploader = new plupload.Uploader({
         runtimes : 'html5,flash,silverlight,html4',
         browse_button : 'pickfiles', // you can pass in id...
@@ -58,7 +60,7 @@ var uploader = new plupload.Uploader({
 
                 FilesAdded: function(up, files) {
                         plupload.each(files, function(file) {
-                                document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+                                document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b>' + '<a id="cancel" href="javascript:deletefile(\'' + file.id + '\');">[Cancel]</a>' + '</div>';
                         });
                 },
 
@@ -71,9 +73,22 @@ var uploader = new plupload.Uploader({
                 }
         }
 });
-
-uploader.init();
-
+uploader.init();    
+uploader.bind('UploadComplete', function(reload) {
+    window.location.replace("/verify.php");
+});
+uploader.bind('QueueChanged', function(up, files) {
+    
+});
+    function deletefile(name)
+{
+    //alert("start");
+    uploader.removeFile(name);
+    //uploader.refresh();
+    var div = document.getElementById(name);
+div.parentNode.removeChild(div);
+    //alert("finished");
+}
 </script>
 
 
