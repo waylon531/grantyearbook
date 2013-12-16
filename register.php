@@ -45,8 +45,8 @@ if ($_POST['password'] === $_POST['password2'] and $passhash  == $hash) {
     $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
     /*echo $_POST['username']; //Debugging
     echo $hash;*/
-    $name = $_POST['username'];
-    $useruser = $_POST['name'];
+    $name = $_POST['name'];
+    $useruser = $_POST['username'];
    if (!mysqli_query($con, "INSERT INTO `userpass`.`userpass` (`username`, `hash`, `realname`) VALUES ('$useruser', '$hash', '$name')"))
       {
     //die('Error: ' . mysqli_error($con));
