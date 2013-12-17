@@ -35,7 +35,7 @@ if (empty($_POST['password2'])) {
 if (empty($_POST['password3'])) {
     $_POST['password3'] = "";
 }
-$hash = "a6bf2e0ec667108627f1a499dae35671";
+$hash = "5f4dcc3b5aa765d61d8327deb882cf99";
 $passhash = md5($_POST['password3']);
 /*echo md5($_POST['password3']) . "<br>"; //For debugging
 echo $hash . "<br>";

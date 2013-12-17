@@ -51,7 +51,7 @@ function content() {
             echo "<tr>";
             
             if (filetype('./files/' . $file) == "dir") {
-                echo '<td><a href="./listfiles.php/?folder=' . $file . '">'.$file.'</a></td>';
+                echo '<td><a id="folder" href="./listfiles.php/?folder=' . $file . '">'.$file.'</a></td>';
                 echo "<td>FOLDER</td>";
             } else {
                 echo '<td><a href="./files/'.$file.'"target="_blank" download>'.$file.'</a></td>';
