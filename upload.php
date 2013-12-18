@@ -143,6 +143,7 @@ if (!$chunks || $chunk == $chunks - 1) {
             {
             unlink('files/oldest' . $file);
             $sql = "DELETE FROM `files`.`oldest` WHERE filename =  '$file'";
+            mysqli_query($con,$sql);
             }
         if(file_exists('files/older/' . $file))
             {

@@ -26,6 +26,14 @@ echo '<a href="/redirect.php">Logout</a><br>';
                 echo '<td><a href="' . $fileName . '"target="_blank" download>'.$file.'</a></td>';
                 echo "<td>" . formatBytes(filesize($fileName)) . "</td>" ; //Creates a link to each file, displays filesize, and forces download
         $fileName = './files/' . $_GET["folder"] . '/' .$file;
+            $con=mysqli_connect("localhost","user","password","files");
+                $result = mysqli_query($con,'SELECT * FROM ' . $_GET["folder"] . '
+WHERE filename="' .$file. '"');
+while($row = mysqli_fetch_array($result))
+  {
+    $GLOBALS['uploader']=$row['uploadedby'];
+  }
+                echo "<td>" . $GLOBALS['uploader'] . "</td>"; 
             echo "<td>" . date ("F d Y H:i:s", filemtime($fileName)) . "</td>"; //Shows date modified
             echo "</tr>";
             }

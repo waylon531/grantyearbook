@@ -45,7 +45,7 @@ function content() {
     echo "<h2>Current Files</h2><p>Click on link to download.</p>";
     $files = scandir('./files'); //Change directory to where the files will be saved
     sort($files); // this does the sorting
-    echo "<table><tr><th>File Name</th><th>File Size</th><th>Date uploaded</th></tr>";
+    echo "<table><tr><th>File Name</th><th>File Size</th><th>Uploaded By:</th><th>Date Uploaded:</th></tr>";
     foreach($files as $file){
         if ($file != "." and $file != ".." and $file != "index.php") { //Ignore the . and .. directories and index.php in the files directory when listing files
             echo "<tr>";
@@ -53,9 +53,18 @@ function content() {
             if (filetype('./files/' . $file) == "dir") {
                 echo '<td><a id="folder" href="./listfiles.php/?folder=' . $file . '">'.$file.'</a></td>';
                 echo "<td>FOLDER</td>";
+                echo "<td></td>";
             } else {
                 echo '<td><a href="./files/'.$file.'"target="_blank" download>'.$file.'</a></td>';
                 echo "<td>" . formatBytes(filesize('./files/' . $file)) ; //Creates a link to each file, displays filesize, and forces download
+    $con=mysqli_connect("localhost","user","password","files");
+                $result = mysqli_query($con,'SELECT * FROM current
+WHERE filename="' .$file. '"');
+while($row = mysqli_fetch_array($result))
+  {
+    $GLOBALS['uploader']=$row['uploadedby'];
+  }
+                echo "<td>" . $GLOBALS['uploader'] . "</td>"; 
             }
             echo "<td>" . date ("F d Y H:i:s", filemtime('./files/' . $file)) . "</td>"; //Shows date modified
             echo "</tr>";
