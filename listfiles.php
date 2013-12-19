@@ -24,8 +24,8 @@ function content() {
 echo '<a href="/redirect.php">Logout</a><br>';
     echo '<script>var verify = true;</script>';
     $_SESSION['uploadDirectory'] = 'files/' . $_GET["folder"] . '/';
-    echo $_SESSION['uploadDirectory'];
-    $html = file_get_contents('fileupload.php');
+    //echo $_SESSION['uploadDirectory']; //Debugging
+    $html = file_get_contents('fileupload.php'); //File uploader
     echo $html;
     echo '<script>var verify = false;</script>';
     echo "<h2>Current Files</h2><p>Click on link to download.</p>";

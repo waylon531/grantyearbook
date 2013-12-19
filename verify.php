@@ -78,8 +78,8 @@ while($row = mysqli_fetch_array($result))
     echo "<p>To retrieve older versions of a file look through the folders old, older, and oldest for the file. If you want the current file to be that file, reupload it.</p>";
     echo '<script>var verify = true;</script>';
     $_SESSION['uploadDirectory'] = 'files/';
-    echo $_SESSION['uploadDirectory'];
-    $html = file_get_contents('fileupload.php');
+    //echo $_SESSION['uploadDirectory']; //Debugging
+    $html = file_get_contents('fileupload.php'); //Creates the uploader
     echo $html;
     echo '<script>var verify = false;</script>';
     echo "<p>If you find any bugs, report them to the website's <a href='https://github.com/waylon531/grantyearbook/issues'>github</a></p>";
