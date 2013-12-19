@@ -9,3 +9,6 @@ body {
     color: #333;
     font: 13px Verdana;
 }
+a:visited {
+    color:blue;
+}

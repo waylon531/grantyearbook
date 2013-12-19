@@ -42,20 +42,24 @@ function content() {
     $version = PHP_VERSION_ID/100 - 500; //Get the version number and remove the 5 from the front of it
     $_SESSION['validPassword'] = true; //Save that the password was valid
     echo '<a href="redirect.php">Logout</a><br>';
-    echo "<h2>Current Files</h2><p>Click on link to download.</p>";
+    echo "<h2>Current Files</h2><p>Preview does not work for all filetypes, if you are trying to preview an unsupported file type it will try to download instead</p>";
     $files = scandir('./files'); //Change directory to where the files will be saved
     sort($files); // this does the sorting
-    echo "<table><tr><th>File Name</th><th>File Size</th><th>Uploaded By:</th><th>Date Uploaded:</th></tr>";
+    echo "<table><tr><th>File Name</th><th /><th /><th>File Size</th><th>Uploaded By:</th><th>Date Uploaded:</th></tr>";
     foreach($files as $file){
         if ($file != "." and $file != ".." and $file != "index.php") { //Ignore the . and .. directories and index.php in the files directory when listing files
             echo "<tr>";
             
             if (filetype('./files/' . $file) == "dir") {
-                echo '<td><a id="folder" href="./listfiles.php/?folder=' . $file . '">'.$file.'</a></td>';
+                echo '<td>'.$file.'</td>';
+                echo '<td><a id="folder" href="./listfiles.php/?folder=' . $file . '">Open</a></td>';
+                echo '<td></td>';
                 echo "<td>FOLDER</td>";
                 echo "<td></td>";
             } else {
-                echo '<td><a href="./files/'.$file.'"target="_blank" download>'.$file.'</a></td>';
+                echo '<td>'.$file.'</td>';
+                echo '<td><a href="./files/'.$file.'"target="_blank" download>Download</a></td>';
+                echo '<td><a href="./files/'.$file.'"target="_blank" >Preview</a></td>';
                 echo "<td>" . formatBytes(filesize('./files/' . $file)) ; //Creates a link to each file, displays filesize, and forces download
     $con=mysqli_connect("localhost","user","password","files");
                 $result = mysqli_query($con,'SELECT * FROM current
@@ -71,10 +75,6 @@ while($row = mysqli_fetch_array($result))
         }
     }
     echo "</table>";
-    echo '<form name="input" action="/verify.php" method="post">
-<input type="submit" value="Click to refresh page"';
-        echo ">
-</form>";
     echo "<p>To retrieve older versions of a file look through the folders old, older, and oldest for the file. If you want the current file to be that file, reupload it.</p>";
     echo '<script>var verify = true;</script>';
     $html = file_get_contents('./fileupload.php');
