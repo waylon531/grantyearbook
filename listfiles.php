@@ -22,6 +22,12 @@ function find_to_last_char($str, $char) {
 }
 function content() {
 echo '<a href="/redirect.php">Logout</a><br>';
+    echo '<script>var verify = true;</script>';
+    $_SESSION['uploadDirectory'] = 'files/' . $_GET["folder"] . '/';
+    echo $_SESSION['uploadDirectory'];
+    $html = file_get_contents('fileupload.php');
+    echo $html;
+    echo '<script>var verify = false;</script>';
     echo "<h2>Current Files</h2><p>Click on link to download.</p>";
     $files = scandir('./files/' . $_GET["folder"]); //Change directory to where the files will be saved
     sort($files); // this does the sorting
@@ -40,15 +46,9 @@ echo '<a href="/redirect.php">Logout</a><br>';
                 echo '<td>'.$file.'</td>';
                 echo '<td><a href="/files/'. $_GET["folder"] . '/' .$file.'"target="_blank" download>Download</a></td>';
                 echo '<td><a href="/files/'. $_GET["folder"] . '/' .$file.'"target="_blank" >Preview</a></td>';
-                echo "<td>" . formatBytes(filesize('./files/' . $file)) ; //Creates a link to each file, displays filesize, and forces download
-    $con=mysqli_connect("localhost","user","password","files");
-                $result = mysqli_query($con,'SELECT * FROM current
-WHERE filename="' .$file. '"');
-while($row = mysqli_fetch_array($result))
-  {
-    $GLOBALS['uploader']=$row['uploadedby'];
-  }
-                echo "<td>" . $GLOBALS['uploader'] . "</td>"; 
+                echo "<td>" . formatBytes(filesize('./files/' . $_GET["folder"] . '/' . $file)) ; //Creates a link to each file, displays filesize, and forces download
+                //echo "<td>" . $GLOBALS['uploader'] . "</td>"; 
+                echo "<td />";
             }
             echo "<td>" . date ("F d Y H:i:s", filemtime('./files/' . $file)) . "</td>"; //Shows date modified
             echo "</tr>";

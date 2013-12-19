@@ -15,7 +15,6 @@
 -->
 
 </head>
-
 <h1>File Upload:</h1>
 <div id="filelist">Your browser doesn't have Flash, Silverlight or HTML5 support.</div>
 <br />
@@ -75,7 +74,7 @@ var uploader = new plupload.Uploader({
 });
 uploader.init();    
 uploader.bind('UploadComplete', function(reload) {
-    window.location.replace("/verify.php");
+    //window.location.replace("/verify.php");
 });
 uploader.bind('QueueChanged', function(up, files) {
     
