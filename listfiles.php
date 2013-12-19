@@ -18,25 +18,34 @@ echo '<a href="/redirect.php">Logout</a><br>';
     echo "<h2>Current Files</h2><p>Click on link to download.</p>";
     $files = scandir('./files/' . $_GET["folder"]); //Change directory to where the files will be saved
     sort($files); // this does the sorting
-    echo "<table id='wtf'><tr><th>File Name</th><th>File Size</th><th>Date uploaded</th></tr>";
+    echo "<table id='wtf'><tr><th>File Name</th><th /><th /><th>File Size</th><th>Uploaded By:</th><th>Date uploaded</th></tr>";
     foreach($files as $file){
         if ($file != "." and $file != ".." and $file != "index.php") { //Ignore the . and .. directories and index.php in the files directory when listing files
             echo "<tr>";
-            $fileName = './files/' . $_GET["folder"] . '/' .$file;
-                echo '<td><a href="' . $fileName . '"target="_blank" download>'.$file.'</a></td>';
-                echo "<td>" . formatBytes(filesize($fileName)) . "</td>" ; //Creates a link to each file, displays filesize, and forces download
-        $fileName = './files/' . $_GET["folder"] . '/' .$file;
-            $con=mysqli_connect("localhost","user","password","files");
-                $result = mysqli_query($con,'SELECT * FROM ' . $_GET["folder"] . '
+            
+            if (filetype('./files/' . $_GET["folder"] . '/' . $file) == "dir") {
+                echo '<td>'.$file.'</td>';
+                echo '<td><a id="folder" href="./listfiles.php/?folder=' . $_GET["folder"] . '/' . $file . '">Open</a></td>';
+                echo '<td></td>';
+                echo "<td>FOLDER</td>";
+                echo "<td></td>";
+            } else {
+                echo '<td>'.$file.'</td>';
+                echo '<td><a href="/files/'. $_GET["folder"] . '/' .$file.'"target="_blank" download>Download</a></td>';
+                echo '<td><a href="/files/'. $_GET["folder"] . '/' .$file.'"target="_blank" >Preview</a></td>';
+                echo "<td>" . formatBytes(filesize('./files/' . $file)) ; //Creates a link to each file, displays filesize, and forces download
+    $con=mysqli_connect("localhost","user","password","files");
+                $result = mysqli_query($con,'SELECT * FROM current
 WHERE filename="' .$file. '"');
 while($row = mysqli_fetch_array($result))
   {
     $GLOBALS['uploader']=$row['uploadedby'];
   }
                 echo "<td>" . $GLOBALS['uploader'] . "</td>"; 
-            echo "<td>" . date ("F d Y H:i:s", filemtime($fileName)) . "</td>"; //Shows date modified
-            echo "</tr>";
             }
+            echo "<td>" . date ("F d Y H:i:s", filemtime('./files/' . $file)) . "</td>"; //Shows date modified
+            echo "</tr>";
+        }
         }
 echo "</table>";
 echo "<table>";
