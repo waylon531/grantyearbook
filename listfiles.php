@@ -13,6 +13,13 @@ function formatBytes($size, $precision = 2) //function to change file size suffi
 
     return round(pow(1024, $base - floor($base)), $precision) . $suffixes[floor($base)];
 }
+function find_to_last_char($str, $char) {
+  $reversed_string = strrev($str);
+  $char_pos = strpos($reversed_string, $char);
+  if ($char_pos === false) return $str; // character not present
+  $trim = substr($reversed_string, $char_pos);
+  return strrev($trim);
+}
 function content() {
 echo '<a href="/redirect.php">Logout</a><br>';
     echo "<h2>Current Files</h2><p>Click on link to download.</p>";
@@ -25,7 +32,7 @@ echo '<a href="/redirect.php">Logout</a><br>';
             
             if (filetype('./files/' . $_GET["folder"] . '/' . $file) == "dir") {
                 echo '<td>'.$file.'</td>';
-                echo '<td><a id="folder" href="./listfiles.php/?folder=' . $_GET["folder"] . '/' . $file . '">Open</a></td>';
+                echo '<td><a id="folder" href="/listfiles.php/?folder=' . $_GET["folder"] . '/' . $file . '">Open</a></td>';
                 echo '<td></td>';
                 echo "<td>FOLDER</td>";
                 echo "<td></td>";
@@ -51,15 +58,28 @@ echo "</table>";
 echo "<table>";
 echo "<tr>";
 echo "<td>";    
-echo '<form name="input" action="/verify.php" method="post">
-<input type="submit" value="Back">
-</form>';
-echo "<td>";
+   // echo $_GET["folder"] . "<br>"; //Debugging
+$folder = find_to_last_char($_GET["folder"], '/');
+    $folder = substr($folder, 0, -1); //Remove the / at the end of the string
+    //echo $folder; //Debugging
+//echo '<a href="/listfiles.php/?folder=' . $folder . '">BACK
+//</a>';
+    
+    if (strpos($_GET["folder"], '/') === false) {
+        echo '<form name="input" action="/verify.php" method="post">
+<input type="submit" value="Back">';
+    } else {
+echo '<form name="input" action="/listfiles.php/?folder=' . $folder . '" method="post">
+<input type="submit" value="Back">';
+        }
+echo "</form>";
+    echo "<td>";
     echo '<form name="input" action="/listfiles.php/?folder=' . $_GET["folder"] . '" method="post">
 <input type="submit" value="Click to refresh page"';
         echo ">
 </form>";
-echo "</table>";}
+echo "</table>";
+}
 $version = PHP_VERSION_ID/100 - 500; //Get the version number and remove the 5 from the front of it
     if ($_SESSION['validPassword'] === true) { //Check password against plaintext. Uncomment line 34 and comment line 35 to enable password hash verification
         content();
