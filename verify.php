@@ -42,6 +42,20 @@ function content() {
     $version = PHP_VERSION_ID/100 - 500; //Get the version number and remove the 5 from the front of it
     $_SESSION['validPassword'] = true; //Save that the password was valid
     echo '<a href="redirect.php">Logout</a><br>';
+    echo '<script>var verify = true;</script>';
+    $_SESSION['uploadDirectory'] = 'files/';
+    //echo $_SESSION['uploadDirectory']; //Debugging
+    $html = file_get_contents('fileupload.php'); //Creates the uploader
+    echo $html;
+    echo '<script>var verify = false;</script>';
+    echo "<h2>Create Folder:</h2>";
+    echo '<form action="directory.php" method="post">
+        <table>
+            <tr><td>Folder Name: <td><input type="text" name="folder">
+            <td><input type="submit" value="Create">
+        </table>
+    </form>';
+    $_SESSION['backlink'] = "verify.php";
     echo "<h2>Current Files</h2><p>Preview does not work for all filetypes, if you are trying to preview an unsupported file type it will try to download instead</p>";
     $files = scandir('./files'); //Change directory to where the files will be saved
     sort($files); // this does the sorting
@@ -76,14 +90,9 @@ while($row = mysqli_fetch_array($result))
     }
     echo "</table>";
     echo "<p>To retrieve older versions of a file look through the folders old, older, and oldest for the file. If you want the current file to be that file, reupload it.</p>";
-    echo '<script>var verify = true;</script>';
-    $_SESSION['uploadDirectory'] = 'files/';
-    //echo $_SESSION['uploadDirectory']; //Debugging
-    $html = file_get_contents('fileupload.php'); //Creates the uploader
-    echo $html;
-    echo '<script>var verify = false;</script>';
     echo "<p>If you find any bugs, report them to the website's <a href='https://github.com/waylon531/grantyearbook/issues'>github</a></p>";
-    echo 'This server is running php version 5.' . $version;}
+    //echo 'This server is running php version 5.' . $version;
+}
     //echo sys_get_temp_dir();
 //Checks the entered password against the password hash
 //Get the version number and remove the 5 from th front of it

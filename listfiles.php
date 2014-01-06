@@ -28,7 +28,23 @@ echo '<a href="/redirect.php">Logout</a><br>';
     $html = file_get_contents('fileupload.php'); //File uploader
     echo $html;
     echo '<script>var verify = false;</script>';
-    echo "<h2>Current Files</h2><p>Click on link to download.</p>";
+    echo "<h2>Create Folder:</h2>";
+    echo '<form action="/directory.php" method="post">
+        <table>
+            <tr><td>Folder Name: <td><input type="text" name="folder">
+            <td><input type="submit" value="Create">
+        </table>
+    </form>';
+    $_SESSION['backlink'] ='/listfiles.php/?folder=' . $_GET['folder'];
+    /*if (strpos($_GET['folder'], "/") === FALSE) {
+        $string = $_GET['folder'];
+    } else {
+        $string = strstr($_GET['folder'], '/');
+        $string = substr($string, 1);
+        $_GLOBALS['string'] = $string;
+    }*/
+    $string = "/" . $_GET['folder'];
+    echo "<h2>Current Files in " . $string . "</h2><p>Click on link to download.</p>";
     $files = scandir('./files/' . $_GET["folder"]); //Change directory to where the files will be saved
     sort($files); // this does the sorting
     echo "<table id='wtf'><tr><th>File Name</th><th /><th /><th>File Size</th><th>Uploaded By:</th><th>Date uploaded</th></tr>";
