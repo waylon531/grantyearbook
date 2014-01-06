@@ -74,7 +74,7 @@ var uploader = new plupload.Uploader({
 });
 uploader.init();    
 uploader.bind('UploadComplete', function(reload) {
-    //window.location.replace("/verify.php");
+    window.location.replace(document.URL);
 });
 uploader.bind('QueueChanged', function(up, files) {
     
