@@ -30,7 +30,7 @@ else
   {
   echo "Error creating table: " . mysqli_error($con) . "<br>";
   }
-$con=mysqli_connect("localhost","user","password","files");
+/*$con=mysqli_connect("localhost","user","password","files");
 $sql="CREATE TABLE current(filename char(64) not null,PRIMARY KEY(filename),uploadedby CHAR(255))";
 if (mysqli_query($con,$sql))
   {
@@ -66,5 +66,5 @@ if (mysqli_query($con,$sql))
 else
   {
   echo "Error creating table: " . mysqli_error($con) . "<br>";
-  }
+  }*/
 ?>

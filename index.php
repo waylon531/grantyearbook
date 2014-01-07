@@ -2,7 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="style.css">
-        <title>Grant High School Yearbook</title>
+        <title>Cloud Storage</title>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     </head>
     <body>
