@@ -89,7 +89,6 @@ while($row = mysqli_fetch_array($result))
         }
     }
     echo "</table>";
-    echo "<p>To retrieve older versions of a file look through the folders old, older, and oldest for the file. If you want the current file to be that file, reupload it.</p>";
     echo "<p>If you find any bugs, report them to the website's <a href='https://github.com/waylon531/grantyearbook/issues'>github</a></p>";
     //echo 'This server is running php version 5.' . $version;
 }
