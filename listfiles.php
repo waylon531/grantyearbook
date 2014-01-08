@@ -3,9 +3,11 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" type="text/css" href="/style2.css">
 <title>Cloud Storage</title>
 </head>
 <?php session_start();
+date_default_timezone_set('America/Los_Angeles');
 function formatBytes($size, $precision = 2) //function to change file size suffix based on size
 {
     $base = log($size) / log(1024);
@@ -66,7 +68,7 @@ echo '<a href="/redirect.php">Logout</a><br>';
                 //echo "<td>" . $GLOBALS['uploader'] . "</td>"; 
                 echo "<td />";
             }
-            echo "<td>" . date ("F d Y H:i:s", filemtime('./files/' . $file)) . "</td>"; //Shows date modified
+            echo "<td>" . date ("F d Y H:i:s", filemtime('./files/' . $_GET["folder"] . '/' . $file)) . "</td>"; //Shows date modified
             echo "</tr>";
         }
         }

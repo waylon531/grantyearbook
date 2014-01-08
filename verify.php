@@ -3,10 +3,12 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style2.css">
 <title>Cloud Storage</title>
 
 </head>
 <?php session_start();
+date_default_timezone_set('America/Los_Angeles');
 // Create connection
 $con=mysqli_connect("localhost","user","password","userpass");
 
