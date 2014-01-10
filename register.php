@@ -18,9 +18,7 @@
     </form>
 <?php
 session_start();
-echo $_SESSION['uploadDirectory'];
-ini_set('error_reporting', E_ALL);
-ini_set('display_errors', 'On');
+//echo $_SESSION['uploadDirectory'];
 $_SESSION['invalid'] = false;
 $con=mysqli_connect("localhost","user","password","userpass");
 if (mysqli_connect_errno())

@@ -66,7 +66,21 @@ echo '<a href="/redirect.php">Logout</a><br>';
                 echo '<td><a href="/files/'. $_GET["folder"] . '/' .$file.'"target="_blank" >Preview</a></td>';
                 echo "<td>" . formatBytes(filesize('./files/' . $_GET["folder"] . '/' . $file)) ; //Creates a link to each file, displays filesize, and forces download
                 //echo "<td>" . $GLOBALS['uploader'] . "</td>"; 
-                echo "<td />";
+        $con=mysqli_connect("localhost","user","password","files");
+                $rest = $_GET['folder'];
+        $rest = substr($_SESSION['uploadDirectory'], 0, -1);
+        $rest = str_replace("/",'\\',$rest);
+        $rest = mysqli_real_escape_string($con,$rest);
+                $result = mysqli_query($con,'SELECT * FROM `'.$rest.'` WHERE filename="'.$file.'"');
+                if (!$result) {
+                    die(mysqli_error($con));
+                }
+                //echo "<br>".$rest ."<br>". $file; //Debugging
+                while($row = mysqli_fetch_array($result))
+                {
+                    $GLOBALS['uploader']=$row['uploadedby'];
+                }
+                echo "<td>".$GLOBALS['uploader']."</td>"; //Where uploaded by goes
             }
             echo "<td>" . date ("F d Y H:i:s", filemtime('./files/' . $_GET["folder"] . '/' . $file)) . "</td>"; //Shows date modified
             echo "</tr>";

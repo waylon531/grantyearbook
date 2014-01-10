@@ -134,7 +134,16 @@ if (!$chunks || $chunk == $chunks - 1) {
   //echo "Stored in: " . $_FILES["file"]["tmp_name"];
   $tmpFile = $filePath;
  // echo "<br>";
+    $con=mysqli_connect("localhost","user","password","files");
     $uploadDir = $_SESSION['uploadDirectory'] . $file;
+    if ($_SESSION['uploadDirectory'] != "files/") {
+        $rest = substr($_SESSION['uploadDirectory'], 0, -1);
+        $rest = str_replace("/",'\\',$rest);
+    } else {
+        $rest = 'files\\';
+    }
+    $rest = mysqli_real_escape_string($con,$rest);
+    $username = $_SESSION['username'];
     if (file_exists($uploadDir)) //Check if file exists
       {
         //echo "<p>Overwriting</p>";
@@ -145,7 +154,8 @@ if (!$chunks || $chunk == $chunks - 1) {
     } else {
         rename($tmpFile, $uploadDir);
       //echo "Stored in: " . "files/" . $_FILES["file"]["name"];
-      } 
+    }
+    $sql=mysqli_query($con,"INSERT INTO `files`.`$rest` (`filename`, `uploadedby`) VALUES ('$file', '$username')");
 }
 
 // Return Success JSON-RPC response

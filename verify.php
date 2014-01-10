@@ -77,9 +77,14 @@ function content() {
                 echo '<td><a href="./files/'.$file.'"target="_blank" download>Download</a></td>';
                 echo '<td><a href="./files/'.$file.'"target="_blank" >Preview</a></td>';
                 echo "<td>" . formatBytes(filesize('./files/' . $file)) ; //Creates a link to each file, displays filesize, and forces download
-    $con=mysqli_connect("localhost","user","password","files");
-                $result = mysqli_query($con,'SELECT * FROM current
-WHERE filename="' .$file. '"');
+        $con=mysqli_connect("localhost","user","password","files");
+                $rest = "files\\";
+                $rest = mysqli_real_escape_string($con,$rest);
+                $result = mysqli_query($con,'SELECT * FROM `'.$rest.'` WHERE filename="' . $file . '"');
+                if (!$result) {
+                    die(mysqli_error($con));
+                }
+                //echo "<br>".$rest ."<br>". $file; //Debuggging
 while($row = mysqli_fetch_array($result))
   {
     $GLOBALS['uploader']=$row['uploadedby'];
