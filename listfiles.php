@@ -26,6 +26,7 @@ function content() {
 echo '<a href="/redirect.php">Logout</a><br>';
     echo '<script>var verify = true;</script>';
     $_SESSION['uploadDirectory'] = 'files/' . $_GET["folder"] . '/';
+    if (strpos($_GET['folder'],"../") !== FALSE) {die;}
     //echo $_SESSION['uploadDirectory']; //Debugging
     $html = file_get_contents('fileupload.php'); //File uploader
     echo $html;
@@ -73,7 +74,7 @@ echo '<a href="/redirect.php">Logout</a><br>';
         $rest = mysqli_real_escape_string($con,$rest);
                 $result = mysqli_query($con,'SELECT * FROM `'.$rest.'` WHERE filename="'.$file.'"');
                 if (!$result) {
-                    die(mysqli_error($con));
+                    mysqli_error($con);
                 }
                 //echo "<br>".$rest ."<br>". $file; //Debugging
                 while($row = mysqli_fetch_array($result))
