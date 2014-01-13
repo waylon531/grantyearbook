@@ -2,6 +2,8 @@
 session_start();
 $con=mysqli_connect("localhost","user","password","files");
 $dir = $_SESSION['uploadDirectory'] . $_POST['folder'];
+$dir = str_replace("\"",'',$dir);
+$dir = str_replace("\'",'',$dir);
 mkdir($dir);
 chmod($dir,0777); 
 //echo $dir;
