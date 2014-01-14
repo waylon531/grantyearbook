@@ -18,6 +18,16 @@ else
   {
   echo "Error creating database: " . mysqli_error($con) . "<br>";
   }
+$sql="CREATE TABLE files\\ (filename char(64) not null,PRIMARY KEY(filename),uploadedby CHAR(255))";
+$con=mysqli_connect("localhost","user","password","files");
+if (mysqli_query($con,$sql))
+  {
+  echo "Table files created successfully<br>";
+  }
+else
+  {
+  echo "Error creating database: " . mysqli_error($con) . "<br>";
+  }
 // Create table
 $sql="CREATE TABLE userpass(username char(64) not null,PRIMARY KEY(username),hash CHAR(255),realname CHAR(255))";
 $con=mysqli_connect("localhost","user","password","userpass");
@@ -30,7 +40,7 @@ else
   {
   echo "Error creating table: " . mysqli_error($con) . "<br>";
   }
-$con=mysqli_connect("localhost","user","password","files");
+/*$con=mysqli_connect("localhost","user","password","files");
 $sql="CREATE TABLE current(filename char(64) not null,PRIMARY KEY(filename),uploadedby CHAR(255))";
 if (mysqli_query($con,$sql))
   {
@@ -66,5 +76,5 @@ if (mysqli_query($con,$sql))
 else
   {
   echo "Error creating table: " . mysqli_error($con) . "<br>";
-  }
+  }*/
 ?>

@@ -135,73 +135,27 @@ if (!$chunks || $chunk == $chunks - 1) {
   $tmpFile = $filePath;
  // echo "<br>";
     $con=mysqli_connect("localhost","user","password","files");
-    if (file_exists("files/" . $file)) //Check if file exists
+    $uploadDir = $_SESSION['uploadDirectory'] . $file;
+    if ($_SESSION['uploadDirectory'] != "files/") {
+        $rest = substr($_SESSION['uploadDirectory'], 0, -1);
+        $rest = str_replace("/",'\\',$rest);
+    } else {
+        $rest = 'files\\';
+    }
+    $rest = mysqli_real_escape_string($con,$rest);
+    $username = $_SESSION['username'];
+    if (file_exists($uploadDir)) //Check if file exists
       {
         //echo "<p>Overwriting</p>";
         //checking if file exsists
-        if(file_exists('files/oldest/' . $file))
-            {
-            unlink('files/oldest' . $file);
-            $sql = "DELETE FROM `files`.`oldest` WHERE filename =  '$file'";
-            mysqli_query($con,$sql);
-            }
-        if(file_exists('files/older/' . $file))
-            {
-            rename('files/older/' . $file, 'files/oldest/' . $file);
-            $sql = "SELECT * FROM `files`.`older` WHERE filename = '$file'";
-            $result = mysqli_query($con,$sql);
-            while($row = mysqli_fetch_array($result))
-            { 
-                $GLOBALS['uploadedBy'] = $row['uploadedby'];
-            } 
-            $uploadedBy = $GLOBALS['uploadedBy'];
-            $sql = "INSERT INTO `files`.`oldest` (`filename`, `uploadedby`) VALUES ('$file','$uploadedBy')";    
-            mysqli_query($con,$sql);
-        
-            $sql = "DELETE FROM `files`.`older` WHERE filename =  '$file'";
-            mysqli_query($con,$sql);
-            }
-        if(file_exists('files/old/' . $file))
-            {
-            rename('files/old/' . $file, 'files/older/' . $file);
-            $sql = "SELECT * FROM `files`.`old` WHERE filename = '$file'";
-            $result = mysqli_query($con,$sql);
-            while($row = mysqli_fetch_array($result))
-            { 
-                $GLOBALS['uploadedBy'] = $row['uploadedby'];
-            } 
-            $uploadedBy = $GLOBALS['uploadedBy'];
-            $sql = "INSERT INTO `files`.`older` (`filename`, `uploadedby`) VALUES ('$file','$uploadedBy')";    
-            mysqli_query($con,$sql);
-        
-            $sql = "DELETE FROM `files`.`old` WHERE filename =  '$file'";
-            mysqli_query($con,$sql);
-        }
-        rename('files/' . $file, 'files/old/' . $file);
-        $sql = "SELECT * FROM `files`.`current` WHERE filename = '$file'";
-       $result = mysqli_query($con,$sql);
-        while($row = mysqli_fetch_array($result))
-  { 
-        $GLOBALS['uploadedBy'] = $row['uploadedby'];
-  } 
-        $uploadedBy = $GLOBALS['uploadedBy'];
-        $sql = "INSERT INTO `files`.`old` (`filename`, `uploadedby`) VALUES ('$file','$uploadedBy')";    
-        mysqli_query($con,$sql);
-        
-        $sql = "DELETE FROM `files`.`current` WHERE filename =  '$file'";
-        mysqli_query($con,$sql);
+        unlink($uploadDir);
         //Place the newest file into your "uploads" folder mow using the move_uploaded_file() function
-        rename($tmpFile, 'files/' . $file);
-        $username = $_SESSION['username'];
-        $sql = "INSERT INTO `files`.`current` (`filename`, `uploadedby`) VALUES ('$file','$username')";
-        mysqli_query($con,$sql);
+        rename($tmpFile, $uploadDir);
     } else {
-        rename($tmpFile, "files/" . $file);
-        $username = $_SESSION['username'];
-        $sql = "INSERT INTO `files`.`current` (`filename`, `uploadedby`) VALUES ('$file','$username')";
-        mysqli_query($con, $sql);
+        rename($tmpFile, $uploadDir);
       //echo "Stored in: " . "files/" . $_FILES["file"]["name"];
-      } 
+    }
+    $sql=mysqli_query($con,"INSERT INTO `files`.`$rest` (`filename`, `uploadedby`) VALUES ('$file', '$username')");
 }
 
 // Return Success JSON-RPC response
