@@ -59,7 +59,7 @@ function content() {
     </form>';
     $_SESSION['backlink'] = "verify.php";
     echo "<h2>Current Files</h2><p>Preview does not work for all filetypes, if you are trying to preview an unsupported file type it will try to download instead</p>";
-    $files = scandir('./files'); //Change directory to where the files will be saved
+    $files = scandir('files'); //Change directory to where the files will be saved
     sort($files); // this does the sorting
     echo '<table><tr><th>File Name</th><th /><th /><th>File Size</th><th>Uploaded By:</th><th>Date Uploaded:</th></tr>';
     foreach($files as $file){
@@ -68,14 +68,14 @@ function content() {
             
             if (filetype('./files/' . $file) == "dir") {
                 echo '<td>'.$file.'</td>';
-                echo '<td><a id="folder" href="./listfiles.php/?folder=' . $file . '">Open</a></td>';
+                echo '<td><a id="folder" href="./listfiles.php?folder=' . $file . '">Open</a></td>';
                 echo '<td></td>';
                 echo "<td>FOLDER</td>";
                 echo "<td></td>";
             } else {
                 echo '<td>'.$file.'</td>';
-                echo '<td><a href="./files/'.$file.'"target="_blank" download>Download</a></td>';
-                echo '<td><a href="./files/'.$file.'"target="_blank" >Preview</a></td>';
+                echo '<td><a href="files/'.$file.'"target="_blank" download>Download</a></td>';
+                echo '<td><a href="files/'.$file.'"target="_blank" >Preview</a></td>';
                 echo "<td>" . formatBytes(filesize('./files/' . $file)) ; //Creates a link to each file, displays filesize, and forces download
         $con=mysqli_connect("localhost","user","password","files");
                 $rest = "files\\";

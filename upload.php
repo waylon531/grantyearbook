@@ -149,7 +149,7 @@ if (!$chunks || $chunk == $chunks - 1) {
         //echo "<p>Overwriting</p>";
         //checking if file exsists
         unlink($uploadDir);
-        //Place the newest file into your "uploads" folder mow using the move_uploaded_file() function
+        //Place the newest file into your "uploads" folder using the move_uploaded_file() function
         rename($tmpFile, $uploadDir);
     } else {
         rename($tmpFile, $uploadDir);

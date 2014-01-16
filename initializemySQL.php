@@ -18,7 +18,7 @@ else
   {
   echo "Error creating database: " . mysqli_error($con) . "<br>";
   }
-$sql="CREATE TABLE files\\ (filename char(64) not null,PRIMARY KEY(filename),uploadedby CHAR(255))";
+$sql="CREATE TABLE `files\\` (filename char(64) not null,PRIMARY KEY(filename),uploadedby CHAR(255))";
 $con=mysqli_connect("localhost","user","password","files");
 if (mysqli_query($con,$sql))
   {

@@ -58,7 +58,7 @@ if ($_POST['password'] === $_POST['password2'] and $passhash  == $hash) {
     echo "<p id='invalid'>Incorrect account creation password</p>";
 }
 ?>
-<form name="input" action="/index.php" method="post">
+<form name="input" action="index.php" method="post">
 <input type="submit" value="Back">
 </form>
     </body>

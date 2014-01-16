@@ -23,7 +23,7 @@ function find_to_last_char($str, $char) {
   return strrev($trim);
 }
 function content() {
-echo '<a href="/redirect.php">Logout</a><br>';
+echo '<a href="redirect.php">Logout</a><br>';
     echo '<script>var verify = true;</script>';
     $_SESSION['uploadDirectory'] = 'files/' . $_GET["folder"] . '/';
     if (strpos($_GET['folder'],"../") !== FALSE) {die;}
@@ -32,13 +32,13 @@ echo '<a href="/redirect.php">Logout</a><br>';
     echo $html;
     echo '<script>var verify = false;</script>';
     echo "<h2>Create Folder:</h2>";
-    echo '<form action="/directory.php" method="post">
+    echo '<form action="directory.php" method="post">
         <table>
             <tr><td>Folder Name: <td><input type="text" name="folder">
             <td><input type="submit" value="Create">
         </table>
     </form>';
-    $_SESSION['backlink'] ='/listfiles.php/?folder=' . $_GET['folder'];
+    $_SESSION['backlink'] ='listfiles.php/?folder=' . $_GET['folder'];
     /*if (strpos($_GET['folder'], "/") === FALSE) {
         $string = $_GET['folder'];
     } else {
@@ -57,14 +57,14 @@ echo '<a href="/redirect.php">Logout</a><br>';
             
             if (filetype('./files/' . $_GET["folder"] . '/' . $file) == "dir") {
                 echo '<td>'.$file.'</td>';
-                echo '<td><a id="folder" href="/listfiles.php/?folder=' . $_GET["folder"] . '/' . $file . '">Open</a></td>';
+                echo '<td><a id="folder" href="listfiles.php?folder=' . $_GET["folder"] . '/' . $file . '">Open</a></td>';
                 echo '<td></td>';
                 echo "<td>FOLDER</td>";
                 echo "<td></td>";
             } else {
                 echo '<td>'.$file.'</td>';
-                echo '<td><a href="/files/'. $_GET["folder"] . '/' .$file.'"target="_blank" download>Download</a></td>';
-                echo '<td><a href="/files/'. $_GET["folder"] . '/' .$file.'"target="_blank" >Preview</a></td>';
+                echo '<td><a href="./files/'. $_GET["folder"] . '/' .$file.'"target="_blank" download>Download</a></td>';
+                echo '<td><a href="./files/'. $_GET["folder"] . '/' .$file.'"target="_blank" >Preview</a></td>';
                 echo "<td>" . formatBytes(filesize('./files/' . $_GET["folder"] . '/' . $file)) ; //Creates a link to each file, displays filesize, and forces download
                 //echo "<td>" . $GLOBALS['uploader'] . "</td>"; 
         $con=mysqli_connect("localhost","user","password","files");
@@ -99,15 +99,15 @@ $folder = find_to_last_char($_GET["folder"], '/');
 //</a>';
     
     if (strpos($_GET["folder"], '/') === false) {
-        echo '<form name="input" action="/verify.php" method="post">
+        echo '<form name="input" action="verify.php" method="post">
 <input type="submit" value="Back">';
     } else {
-echo '<form name="input" action="/listfiles.php/?folder=' . $folder . '" method="post">
+echo '<form name="input" action="listfiles.php?folder=' . $folder . '" method="post">
 <input type="submit" value="Back">';
         }
 echo "</form>";
     echo "<td>";
-    echo '<form name="input" action="/listfiles.php/?folder=' . $_GET["folder"] . '" method="post">
+    echo '<form name="input" action="listfiles.php?folder=' . $_GET["folder"] . '" method="post">
 <input type="submit" value="Click to refresh page"';
         echo ">
 </form>";
@@ -118,7 +118,7 @@ $version = PHP_VERSION_ID/100 - 500; //Get the version number and remove the 5 f
         content();
     } else {
         $_SESSION['invalid'] = true; //If the password was incorrectly entered change invalid to true so that when you go back to the home page invalid password is displayed
-        echo '<meta http-equiv="refresh" content="0;URL=/index.php" /> '; //If the password was incorrect return you to the login page
+        echo '<meta http-equiv="refresh" content="0;URL=index.php" /> '; //If the password was incorrect return you to the login page
     }
 ?>
 </html>
