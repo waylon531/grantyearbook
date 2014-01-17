@@ -38,7 +38,7 @@ echo '<a href="redirect.php">Logout</a><br>';
             <td><input type="submit" value="Create">
         </table>
     </form>';
-    $_SESSION['backlink'] ='listfiles.php/?folder=' . $_GET['folder'];
+    $_SESSION['backlink'] ='listfiles.php?folder=' . $_GET['folder'];
     /*if (strpos($_GET['folder'], "/") === FALSE) {
         $string = $_GET['folder'];
     } else {
