@@ -6,9 +6,16 @@
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     </head>
     <body>
-    <h1 id="title">Grant High School Yearbook</h1>
+        <div id="indexwrap">
+    <h1 id="title">WRW File System</h1> 
+    <?php //this section reads the "config.ini" and displays it.
+        $ini_array = parse_ini_file("config.ini"); 
+        echo "System Version: " . $ini_array['version'] . ".";
+        echo "</br>";
+        echo "Currently Deployed As: " . $ini_array['name'] . ".";
+    ?>
     <a href="problem.html"></a>
-    <p>Enter the password:</p>
+    <p>Login:</p>
     <form action="verify.php" method="post">
         <table>
             <tr><td>Username: <td><input type="text" name="username">
@@ -33,5 +40,6 @@ if(!empty($_SESSION['validPassword'])) { //If the password has been verified thi
 ?>
         <a href="./register.php">Register</a>
         <p>If you find any bugs, report them to the website's <a href="https://github.com/waylon531/grantyearbook/issues">github</a></p>
+    </div>    
     </body>
 </html>

@@ -12,3 +12,7 @@ body {
 a:visited {
     color:blue;
 }
+#indexwrap {
+    width: 350px;
+    margin: 0 auto;
+}
