@@ -28,6 +28,7 @@
 if (empty($_SESSION['invalid'])) { //If invalid has no value set it to false so it doesn't give errors
     $_SESSION['invalid'] = false;
 }
+$_SESSION['register'] = false;
 if ($_SESSION['invalid'] == true) {
     echo "<p id=invalid>Invalid password!</p>"; //Display invalid password if the user entered an incorrect password
     $_SESSION['invalid'] = false; //Reset invalid

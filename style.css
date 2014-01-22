@@ -13,6 +13,10 @@ a:visited {
     color:blue;
 }
 #indexwrap {
-    width: 350px;
+    width: 400px;
     margin: 0 auto;
+    padding: 10px;
+    border:2px solid;
+    border-radius:25px;
+    background-color: lightblue;
 }

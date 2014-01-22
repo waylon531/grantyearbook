@@ -6,6 +6,7 @@
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     </head>
     <body>
+        <div id="indexwrap">
     <form action="register.php" method="post">
         <table>
             <tr><td>Username: <td><input type="text" name="username">
@@ -26,7 +27,7 @@ if (mysqli_connect_errno())
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
 if (empty($_POST['password'])) {
-    $_POST['password'] = 42;
+    $_POST['password'] = "";
 }
 if (empty($_POST['password2'])) {
     $_POST['password2'] = "";
@@ -51,15 +52,22 @@ if ($_POST['password'] === $_POST['password2'] and $passhash  == $hash) {
     //die('Error: ' . mysqli_error($con));
       echo "<p id='invalid'>User already exists</p>";
   } else {
-    echo "<p id='valid'>Registration complete!</p>";}
+    echo "<p id='valid'>Registration complete!</p>";
+    echo '<meta http-equiv="refresh" content="1;URL=index.php" />';}
 } else  if ($_POST['password2'] != $_POST['password'] and !empty($_POST['password2'])){
     echo "<p id='invalid'>Passwords do not match</p>";
 } else if (md5($_POST['password3'])!= $hash and !empty($_POST['password3'])) {
     echo "<p id='invalid'>Incorrect account creation password</p>";
+} else if (empty($_POST['password']) or empty($_POST['username']) or empty($_POST['name'])) {
+    if ($_SESSION['register'] == 1) {
+    echo "<p id='invalid'>All fields were not completed</p>";
+    }
 }
+$_SESSION['register'] = true;
 ?>
 <form name="input" action="index.php" method="post">
 <input type="submit" value="Back">
 </form>
+                </div>
     </body>
 </html>
