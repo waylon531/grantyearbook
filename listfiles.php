@@ -50,7 +50,7 @@ echo '<a href="redirect.php">Logout</a><br>';
     echo "<h2>Current Files in " . $string . "</h2><p>Click on link to download.</p>";
     $files = scandir('./files/' . $_GET["folder"]); //Change directory to where the files will be saved
     sort($files); // this does the sorting
-    echo "<table id='wtf'><tr><th>File Name</th><th /><th /><th>File Size</th><th>Uploaded By:</th><th>Date uploaded</th></tr>";
+    echo "<table id='wtf'><tr><th>File Name</th><th /><th /><th /><th>File Size</th><th>Uploaded By:</th><th>Date uploaded</th></tr>";
     foreach($files as $file){
         if ($file != "." and $file != ".." and $file != "index.php") { //Ignore the . and .. directories and index.php in the files directory when listing files
             echo "<tr>";
@@ -61,10 +61,12 @@ echo '<a href="redirect.php">Logout</a><br>';
                 echo '<td></td>';
                 echo "<td>FOLDER</td>";
                 echo "<td></td>";
+                echo "<td />";
             } else {
                 echo '<td>'.$file.'</td>';
                 echo '<td><a href="./files/'. $_GET["folder"] . '/' .$file.'"target="_blank" download>Download</a></td>';
                 echo '<td><a href="./files/'. $_GET["folder"] . '/' .$file.'"target="_blank" >Preview</a></td>';
+                echo '<td><a id="folder" href="./action.php?directory=' . $_GET['folder'] . "&file=" . $file . '&action=delete">Delete</a></td>';
                 echo "<td>" . formatBytes(filesize('./files/' . $_GET["folder"] . '/' . $file)) ; //Creates a link to each file, displays filesize, and forces download
                 //echo "<td>" . $GLOBALS['uploader'] . "</td>"; 
         $con=mysqli_connect("localhost","user","password","files");

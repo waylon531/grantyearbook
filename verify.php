@@ -61,7 +61,7 @@ function content() {
     echo "<h2>Current Files</h2><p>Preview does not work for all filetypes, if you are trying to preview an unsupported file type it will try to download instead</p>";
     $files = scandir('files'); //Change directory to where the files will be saved
     sort($files); // this does the sorting
-    echo '<table><tr><th>File Name</th><th /><th /><th>File Size</th><th>Uploaded By:</th><th>Date Uploaded:</th></tr>';
+    echo '<table><tr><th>File Name</th><th /><th /><th /><th>File Size</th><th>Uploaded By:</th><th>Date Uploaded:</th></tr>';
     foreach($files as $file){
         if ($file != "." and $file != ".." and $file != "index.php") { //Ignore the . and .. directories and index.php in the files directory when listing files
             echo "<tr>";
@@ -76,6 +76,7 @@ function content() {
                 echo '<td>'.$file.'</td>';
                 echo '<td><a href="files/'.$file.'"target="_blank" download>Download</a></td>';
                 echo '<td><a href="files/'.$file.'"target="_blank" >Preview</a></td>';
+                echo '<td><a id="folder" href="./action.php?file=' . $file . '&action=delete">Delete</a></td>';
                 echo "<td>" . formatBytes(filesize('./files/' . $file)) ; //Creates a link to each file, displays filesize, and forces download
         $con=mysqli_connect("localhost","user","password","files");
                 $rest = "files\\";

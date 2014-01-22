@@ -149,6 +149,7 @@ if (!$chunks || $chunk == $chunks - 1) {
         //echo "<p>Overwriting</p>";
         //checking if file exsists
         unlink($uploadDir);
+        mysqli_query($con,"DELETE FROM `$rest` WHERE `filename`='$file'");
         //Place the newest file into your "uploads" folder using the move_uploaded_file() function
         rename($tmpFile, $uploadDir);
     } else {
