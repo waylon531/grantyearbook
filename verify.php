@@ -70,8 +70,10 @@ function content() {
                 echo '<td>'.$file.'</td>';
                 echo '<td><a id="folder" href="./listfiles.php?folder=' . $file . '">Open</a></td>';
                 echo '<td></td>';
+                echo "<td />";
                 echo "<td>FOLDER</td>";
                 echo "<td></td>";
+                
             } else {
                 echo '<td>'.$file.'</td>';
                 echo '<td><a href="files/'.$file.'"target="_blank" download>Download</a></td>';
