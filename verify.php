@@ -68,36 +68,65 @@ function content() {
             
             if (filetype('./files/' . $file) == "dir") {
                 echo '<td>'.$file.'</td>';
-                echo '<td><a id="folder" href="./listfiles.php?folder=' . $file . '">Open</a></td>';
+                echo '<td><a id="folder" href="listfiles.php?folder=' . $file . '">Open</a></td>';
                 echo '<td></td>';
-                echo "<td />";
                 echo "<td>FOLDER</td>";
                 echo "<td></td>";
-                
-            } else {
-                echo '<td>'.$file.'</td>';
-                echo '<td><a href="files/'.$file.'"target="_blank" download>Download</a></td>';
-                echo '<td><a href="files/'.$file.'"target="_blank" >Preview</a></td>';
-                echo '<td><a id="folder" href="./action.php?file=' . $file . '&action=delete">Delete</a></td>';
+                echo "<td />";
+                echo "<td>" . date ("F d Y H:i:s", filemtime('./files/' . $file)) . "</td>"; //Shows date modified
+            echo "</tr>"; //END
+            }
+        }
+    }
+                foreach($files as $file){
+        if ($file != "." and $file != ".." and $file != "index.php") {
+            if (filetype('./files/' . $file) == "file") {
+                /*echo '<td>'.$file.'</td>';
+                echo '<td><a href="./files/'. $_GET["folder"] . '/' .$file.'"target="_blank" download>Download</a></td>';
+                echo '<td><a href="./files/'. $_GET["folder"] . '/' .$file.'"target="_blank" >Preview</a></td>';
+                echo '<td><a id="folder" href="./action.php?directory=' . $_GET['folder'] . "&file=" . $file . '&action=delete">Delete</a></td>';
+                echo "<td>" . formatBytes(filesize('./files/' . $_GET["folder"] . '/' . $file)) ; //Creates a link to each file, displays filesize, and forces download
+                //echo "<td>" . $GLOBALS['uploader'] . "</td>"; 
+        $con=mysqli_connect("localhost","user","password","files");
+                $rest = $_GET['folder'];
+        $rest = substr($_SESSION['uploadDirectory'], 0, -1);
+        $rest = str_replace("/",'\\',$rest);
+        $rest = mysqli_real_escape_string($con,$rest);
+                $result = mysqli_query($con,'SELECT * FROM `'.$rest.'` WHERE filename="'.$file.'"');
+                if (!$result) {
+                    mysqli_error($con);
+                }
+                //echo "<br>".$rest ."<br>". $file; //Debugging
+                while($row = mysqli_fetch_array($result))
+                {
+                    $GLOBALS['uploader']=$row['uploadedby'];
+                }
+                echo "<td>".$GLOBALS['uploader']."</td>"; //Where uploaded by goes*/
+            
+            echo '<td>'.$file.'</td>';
+                echo '<td><a href="./files/' .$file.'"target="_blank" download>Download</a></td>';
+                echo '<td><a href="./files/' .$file.'"target="_blank" >Preview</a></td>';
+                echo '<td><a id="folder" href="./action.php?directory=&file=' . $file . '&action=delete">Delete</a></td>';
                 echo "<td>" . formatBytes(filesize('./files/' . $file)) ; //Creates a link to each file, displays filesize, and forces download
+                //echo "<td>" . $GLOBALS['uploader'] . "</td>"; 
         $con=mysqli_connect("localhost","user","password","files");
                 $rest = "files\\";
                 $rest = mysqli_real_escape_string($con,$rest);
                 $result = mysqli_query($con,'SELECT * FROM `'.$rest.'` WHERE filename="' . $file . '"');
                 if (!$result) {
-                    die(mysqli_error($con));
+                    mysqli_error($con);
                 }
-                //echo "<br>".$rest ."<br>". $file; //Debuggging
-while($row = mysqli_fetch_array($result))
-  {
-    $GLOBALS['uploader']=$row['uploadedby'];
-  }
-                echo "<td>" . $GLOBALS['uploader'] . "</td>"; 
+                //echo "<br>".$rest ."<br>". $file; //Debugging
+                while($row = mysqli_fetch_array($result))
+                {
+                    $GLOBALS['uploader']=$row['uploadedby'];
+                }
+                echo "<td>".$GLOBALS['uploader']."</td>"; //Where uploaded by goes
+                echo "<td>" . date ("F d Y H:i:s", filemtime('./files/' . $file)) . "</td>"; //Shows date modified
+                echo "</tr>"; //END
             }
-            echo "<td>" . date ("F d Y H:i:s", filemtime('./files/' . $file)) . "</td>"; //Shows date modified
-            echo "</tr>";
+            }
         }
-    }
     echo "</table>";
     echo "<p>If you find any bugs, report them to the website's <a href='https://github.com/waylon531/grantyearbook/issues'>github</a></p>";
     //echo 'This server is running php version 5.' . $version;

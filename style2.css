@@ -1,2 +1,2 @@
-tr:nth-child(odd)   { background-color:#eee; }
-tr:nth-child(even)    { background-color:lightblue; }
+#folder:nth-child(odd)   { background-color:#eee; }
+#folder:nth-child(even)    { background-color:lightblue; }
