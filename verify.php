@@ -50,6 +50,7 @@ function content() {
     $html = file_get_contents('fileupload.php'); //Creates the uploader
     echo $html;
     echo '<script>var verify = false;</script>';
+    echo '<div id="foldercreation">'; 
     echo "<h2>Create Folder:</h2>";
     echo '<form action="directory.php" method="post">
         <table>
@@ -57,6 +58,7 @@ function content() {
             <td><input type="submit" value="Create">
         </table>
     </form>';
+    echo '</div>';
     $_SESSION['backlink'] = "verify.php";
     echo "<h2>Current Files</h2><p>Preview does not work for all filetypes, if you are trying to preview an unsupported file type it will try to download instead</p>";
     $files = scandir('files'); //Change directory to where the files will be saved

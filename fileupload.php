@@ -15,18 +15,21 @@
 -->
 
 </head>
-<h1>File Upload:</h1>
+    <br />
+    <div id="uploader"> 
+<h2>File Upload:</h2>
+<p>Current Queue:</p>
 <div id="filelist">Your browser doesn't have Flash, Silverlight or HTML5 support.</div>
 <br />
-
+    
 <div id="container">
     <script>
         var verify;
-    if (verify === true) {document.write('<a id="pickfiles" href="javascript:;">[Select files]</a> <a id="uploadfiles" href="javascript:;">[Upload files]</a>')
+    if (verify === true) {document.write('<a id="pickfiles" href="javascript:;">[Add Files to Queue]</a> <a id="uploadfiles" href="javascript:;">[Upload Files in Queue]</a>') //tried to make the buttons less confusing
     }
     </script>
 </div>
-
+</div>
 <br />
 <pre id="console"></pre>
 
