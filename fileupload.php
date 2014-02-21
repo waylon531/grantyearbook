@@ -25,7 +25,7 @@
 <div id="container">
     <script>
         var verify;
-    if (verify === true) {document.write('<a id="pickfiles" href="javascript:;">[Add Files to Queue]</a> <a id="uploadfiles" href="javascript:;">[Upload Files in Queue]</a>') //tried to make the buttons less confusing
+    if (verify === true) {document.write('<a id="pickfiles" href="javascript:;">[Add Files to Queue]</a> <a id="uploadfiles" href="javascript:;">[Upload Queue]</a>') //tried to make the buttons less confusing
     }
     </script>
 </div>

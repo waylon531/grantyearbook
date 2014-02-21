@@ -5,7 +5,20 @@
 <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="style2.css">
 <title>Cloud Storage</title>
-
+    <script LANGUAGE="JavaScript">
+<!--
+// Nannette Thacker http://www.shiningstar.net
+function confirmSubmit()
+{
+var agree=confirm("Are you sure you wish to continue?");
+if (agree)
+	return true ;
+else
+	return false ;
+}
+// -->
+</script>
+    
 </head>
 <?php session_start();
 date_default_timezone_set('America/Los_Angeles');
@@ -63,7 +76,7 @@ function content() {
     echo "<h2>Current Files</h2><p>Preview does not work for all filetypes, if you are trying to preview an unsupported file type it will try to download instead</p>";
     $files = scandir('files'); //Change directory to where the files will be saved
     sort($files); // this does the sorting
-    echo '<table><tr><th>File Name</th><th /><th /><th /><th>File Size</th><th>Uploaded By:</th><th>Date Uploaded:</th></tr>';
+    echo '<table><tr><th>File Name</th><th /><th /><th /><th /><th>File Size</th><th>Uploaded By:</th><th>Date Uploaded:</th></tr>';
     foreach($files as $file){
         if ($file != "." and $file != ".." and $file != "index.php") { //Ignore the . and .. directories and index.php in the files directory when listing files
             echo "<tr>";
@@ -73,6 +86,8 @@ function content() {
                 echo '<td><a id="folder" href="./listfiles.php?folder=' . $file . '">Open</a></td>';
                 echo '<td></td>';
                 echo "<td />";
+                echo "<td></td>";
+                //echo '<td><a id="folder" href="./action.php?file=' . $file . '&action=rename">Rename</a></td>';
                 echo "<td>FOLDER</td>";
                 echo "<td></td>";
                 
@@ -80,7 +95,13 @@ function content() {
                 echo '<td>'.$file.'</td>';
                 echo '<td><a href="files/'.$file.'"target="_blank" download>Download</a></td>';
                 echo '<td><a href="files/'.$file.'"target="_blank" >Preview</a></td>';
-                echo '<td><a id="folder" href="./action.php?file=' . $file . '&action=delete">Delete</a></td>';
+                echo '<td><a onclick="return confirmSubmit()" id="folder" href="./action.php?file=' . $file . '&action=delete">Delete</a></td>';
+                echo '<td><form name="input" action="action.php" method="get" onsubmit="return confirmSubmit()">
+                      <input type="text" name="newname">
+                      <input type="hidden" name="file" value="'. $file . '">
+                      <input type="hidden" name="action" value="rename">
+                      <input type="submit" value="Rename">
+                      </form></td>';
                 echo "<td>" . formatBytes(filesize('./files/' . $file)) ; //Creates a link to each file, displays filesize, and forces download
         $con=mysqli_connect("localhost","user","password","files");
                 $rest = "files\\";
